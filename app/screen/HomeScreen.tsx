@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Text, Header, Icon, ListItem } from 'react-native-elements';
-import { StyleSheet, View, FlatList, ImageBackground, Image, Platform, Animated } from 'react-native';
+import { StyleSheet, View, FlatList, ImageBackground, Image, Platform, Animated, TouchableOpacity } from 'react-native';
 import MSearchBar from '../components/MSearchBar';
 import MListHeader from '../components/MListHeader';
 import { getStatusBarHeight } from '../utils/StatusBarHeight';
@@ -44,7 +44,12 @@ const headerHeight = Platform.select({
 	default: 44,
 }) + getStatusBarHeight();
 
-class HomeScreen extends Component {
+interface Props {
+	navigation?: any,
+}
+
+class HomeScreen extends Component<Props> {
+	static navigationOptions: () => { header: null; };
 
 	state = {
 		searchText: '',
@@ -90,7 +95,11 @@ class HomeScreen extends Component {
 
 	renderCitiesItem = ({ item }: any) => {
 		return (
-			<View style={styles.itemContainer}>
+			<TouchableOpacity
+				activeOpacity={0.8}
+				style={styles.itemContainer}
+				onPress={() => this.props.navigation.navigate('MyTrip')}
+			>
 				<ImageBackground borderRadius={10} source={item.background} style={styles.imageBackground} />
 				<ListItem
 					title={item.title}
@@ -99,15 +108,19 @@ class HomeScreen extends Component {
 					subtitleStyle={styles.subtitleListStyle}
 					containerStyle={styles.itemListContainer}
 				/>
-			</View>
+			</TouchableOpacity>
 		);
 	}
 
 	renderPlaceItem = ({ item }: any) => {
 		return (
-			<View style={styles.itemContainer}>
+			<TouchableOpacity
+				activeOpacity={0.8}
+				style={styles.itemContainer}
+				onPress={() => this.props.navigation.navigate('MyTrip')}
+			>
 				<Image borderRadius={10} source={item.background} style={styles.placeImage} />
-			</View>
+			</TouchableOpacity>
 		);
 	}
 
@@ -202,6 +215,10 @@ class HomeScreen extends Component {
 		);
 	}
 }
+
+HomeScreen.navigationOptions = () => ({
+	header: null,
+})
 
 const styles = StyleSheet.create({
 	container: {
