@@ -10,6 +10,7 @@
 
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
+import 'react-native-gesture-handler';
 import HomeScreen from './app/screen/HomeScreen';
 import MyTripScreen from './app/screen/MyTripScreen';
 import MyTripDetailScreen from './app/screen/MyTripDetailScreen';
